@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: public-api
+  #namespace: public-stage SE DEFINE EN EL OVERLAY
+
+spec:
+  replicas: 0 #SE DEFINE EN OVERLAY
+
+  #selector:
+  #  matchLabels:
+  #    app: public-api
+  template:
+    metadata:
+      name: public-api
+   #   labels:
+   #    app: public-api
+    spec:
+      #imagePullSecrets:
+      #  - name: regcred
+      containers:
+      - name: public-api
+        image: KUSTOMIZE-DEFINED #SE DEFINE EN OVERLAYS 
+        # imagePullPolicy: Always
+
+        ports:
+        - containerPort: 3000
+          name: public-api
+        resources:
+          limits:
+            cpu: 20m
+            memory: 200Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+            
+        envFrom:
+          - configMapRef:
+              name: cm-private-api
