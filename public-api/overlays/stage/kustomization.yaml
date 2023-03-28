@@ -8,41 +8,41 @@ commonLabels:
   team: devops
 
 commonAnnotations:
-  note: "This is an STAGE deployment"
+  note: This is an STAGE deployment
 
 resources:
-  - ns.yaml
-  - ../../base
+- ns.yaml
+- ../../base
 
-patchesStrategicmerge:
-  - deploy-merge.yaml
+patchesStrategicMerge:
+- deploy-merge.yaml
 
 
-patches:
   # in-line
-  - target:
-      name: svc-public-api
-    patch: |
-      - op: add
-        path: /spec/type
-        value: ClusterIP
 
     
 
   # yaml file
-  - target:
-      name: cm-private-api
-    path: cm-patch.yaml
 
-  - target:
-      name: public-api
-      kind: Ingress
-    path: ingress-patch.yaml
+patches:
+- patch: |
+    - op: add
+      path: /spec/type
+      value: ClusterIP
+  target:
+    name: svc-public-api
+- path: cm-patch.yaml
+  target:
+    name: cm-private-api
+- path: ingress-patch.yaml
+  target:
+    kind: Ingress
+    name: public-api
 
 
 
 
-images: 
-  - name: KUSTOMIZE-DEFINED
-    newName: hsolicha/kubelabs_publicapi2
-    newTag: 1.0.0
+images:
+- name: KUSTOMIZE-DEFINED
+  newName: hsolicha/kubelabs_publicapi2
+  newTag: 2.0.0
