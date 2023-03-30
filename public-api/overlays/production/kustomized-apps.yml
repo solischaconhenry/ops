@@ -71,7 +71,7 @@ spec:
       - envFrom:
         - configMapRef:
             name: cm-private-api
-        image: hsolicha/kubelabs_publicapi2:2.0.0
+        image: hsolicha/kubelabs_publicapi2:5.0.0
         name: public-api
         ports:
         - containerPort: 3000

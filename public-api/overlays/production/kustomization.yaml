@@ -42,4 +42,4 @@ patches:
 images:
 - name: KUSTOMIZE-DEFINED
   newName: hsolicha/kubelabs_publicapi2
-  newTag: 2.0.0
+  newTag: 5.0.0
