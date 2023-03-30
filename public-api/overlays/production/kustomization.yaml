@@ -8,38 +8,38 @@ commonLabels:
   team: devops
 
 commonAnnotations:
-  note: "This is an Production deployment"
+  note: This is an Production deployment
 
 resources:
-  - ns.yaml
-  - ../../base
+- ns.yaml
+- ../../base
 
-patches:
   # in-line
-  - target:
-      name: svc-public-api
-    patch: |
-      - op: add
-        path: /spec/type
-        value: ClusterIP
 
     
   # yaml file
-  - target:
-      name: public-api
-      kind: Deployment
-    path: deploy-patch.yaml
 
-  - target:
-      name: cm-private-api
-    path: cm-patch.yaml
 
-  - target:
-      name: public-api
-      kind: Ingress
-    path: ingress-patch.yaml
+patches:
+- patch: |
+    - op: add
+      path: /spec/type
+      value: ClusterIP
+  target:
+    name: svc-public-api
+- path: deploy-patch.yaml
+  target:
+    kind: Deployment
+    name: public-api
+- path: cm-patch.yaml
+  target:
+    name: cm-private-api
+- path: ingress-patch.yaml
+  target:
+    kind: Ingress
+    name: public-api
 
-images: 
-  - name: KUSTOMIZE-DEFINED
-    newName: hsolicha/kubelabs_publicapi2
-    newTag: 1.0.0
+images:
+- name: KUSTOMIZE-DEFINED
+  newName: hsolicha/kubelabs_publicapi2
+  newTag: 2.0.0
